@@ -42,6 +42,21 @@ services:
     networks:
       - sgbd-compose-network
 
+  mongodb:
+    image: mongo:4.2.3-bionic
+    container_name: x_mongo_4
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=x_db
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+    volumes:
+      # seeding scripts
+      #- ./mongo-entrypoint:/docker-entrypoint-initdb.d
+    networks:
+      - sgbd-compose-network
+
 networks:
   sgbd-compose-network:
     driver: bridge
